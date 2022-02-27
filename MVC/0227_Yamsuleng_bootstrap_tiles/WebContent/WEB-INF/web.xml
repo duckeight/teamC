@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+  <display-name>springmvc_templates</display-name>
+  
+  <!-- 없어도 아래에 filter 단만 있어도 Spring MVC가 되긴 한다... -->
+    <!-- 공통적으로 사용해야하는  공통 bean 들을 쓸 때 이용되는 섹션 -->
+  <!-- context-param는 root-context 관련 -->
+  <context-param>
+    <param-name>contextConfigLocation</param-name>
+    <param-value>/WEB-INF/spring/root-context.xml</param-value>
+  </context-param> 
+  
+  <!-- ContextLoaderListener는 자주 쓰는 애들을 미리 올려서 자주쓰게 하는 자바 스태틱 같은 개념 -->
+  <listener>
+    <listener-class>
+  	org.springframework.web.context.ContextLoaderListener
+    </listener-class>
+  </listener> 
+  
+  <!-- DispatcherServlet의 바로 앞단인 filter의 언어 인코딩 세팅  --> 
+ <filter>
+  <filter-name>characterEncoding</filter-name>
+  <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value><!-- 여기서 utf-8 로 바꿔주면 된다 -->
+  	</init-param>
+  	<init-param>
+  		<param-name>forceEncoding</param-name>
+  		<param-value>true</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  <filter-name>characterEncoding</filter-name>
+  <url-pattern>/*</url-pattern>  <!--'/*' 은 요청받는 모든 URL을 처리한다는 의미  -->
+  </filter-mapping>
+   
+   
+  <!-- servlet은  servlet-context 관련 -->
+  <servlet>
+  	<servlet-name>kosmo100</servlet-name>
+  	<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+ 	<init-param><!-- DispatcherServlet에서 참고하는 xml을 설정  -->
+ 		<param-name>contextConfigLocation</param-name>
+ 		<param-value>/WEB-INF/kosmo-*.xml</param-value>
+ 	</init-param>
+  </servlet>
+  
+  <!-- 1. request 는 servlet-mapping을 먼저 거친 후, url-pattern패턴의 / 을 참고-->
+  <!-- 2. 같은 이름을 가진 mapping 원본 대상인 상단의 servlet으로  간다   -->
+  <!-- 3. servlet에 있는 DispatcherServlet은 자신이 참고하는 kosmo-*.xml을 읽어 들인다.-->
+  
+  <!--  Servlet Mapping이란 특정 servlet을 요청할 때, 전체 경로를 url에 써주면, 너무 복잡하고 보안에도 취약하기 때문에, 특정 단어로 매핑을 시킨다-->
+  <!-- url-patten은 실제 서블릿 매핑 이름을 의미한다. 서블릿 매핑 시 사용되는 가상의 이름이며 클라이언트가 브라우저에게 요청할 때, 사용할 때는 반드시 '/'(슬래시)로 시작한다. -->
+  
+  <servlet-mapping>
+  	<servlet-name>kosmo100</servlet-name> <!-- mapping과 원본의 name 은 같아야 한다 -->
+  	<url-pattern>/</url-pattern>
+  </servlet-mapping>
+  
+    <!-- 여기는 디스패쳐 서블릿 가기전의 WAS 단에서 먼저 읽어 들인다. tomcat web.xml에  -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

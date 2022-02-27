@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+       
+  <!-- tiles 의 전체적 틀을 잡아주는 xml -->     
+  <tiles-definitions>
+   <definition name="defaultTemplate" template="/WEB-INF/template/default/template.jsp">
+      <put-attribute name="header" value="/WEB-INF/template/default/header.jsp" />
+      <put-attribute name="menu" value="/WEB-INF/template/default/menu.jsp" />
+      <put-attribute name="footer" value="/WEB-INF/template/default/footer.jsp" />
+   </definition>
+   
+   <!-- tiles를 쓰는 상태에서는 rest 타입으로 하면 tiles 까지 Json에 붙어버리기 때문에 /WEB-INF/views/{1}/{2}.jsp 이런식으로 설정해준다
+   {1}는 views의 첫번째 하위폴더, {2} 는{1}의 하위폴더 즉 ,views의 두번째 하위폴더 라는 뜻이다  aa.jsp bb.jsp 이런식을 설정하면 tiles 안쓰는 식
+   -->
+   
+   <definition name="*/*" extends="defaultTemplate">
+         <put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp"/>
+   </definition>      
+</tiles-definitions>    

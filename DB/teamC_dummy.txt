@@ -1,0 +1,127 @@
+
+-- ==================== customer =======================  
+insert into account(id, user_id, pwd, name, acc, gender, age, email, phone, address) values(account_seq.nextval, 'abc0001', 'a000001', '장희주', 'customer', 'F', 27, 'abc0001@naver.com', '010-0000-0000', '서울시 금천구 가산동 56-1');
+insert into account(id, user_id, pwd, name, acc, gender, age, email, phone, address) values(account_seq.nextval, 'abc0002', 'a000002', '김영주', 'customer', 'F', 27, 'abc0002@naver.com', '010-1111-1111', '서울시 금천구 가산동 2-1');
+insert into account(id, user_id, pwd, name, acc, gender, age, email, phone, address) values(account_seq.nextval, 'abc0003', 'a000003', '이우빈', 'customer', 'F', 27, 'abc0003@naver.com', '010-2222-2222', '서울시 금천구 가산동 4-18');
+insert into account(id, user_id, pwd, name, acc, gender, age, email, phone, address) values(account_seq.nextval, 'abc0004', 'a000004', '김성태', 'customer', 'M', 26, 'abc0004@naver.com', '010-3333-3333', '서울시 금천구 가산동 7');
+insert into account(id, user_id, pwd, name, acc, gender, age, email, phone, address) values(account_seq.nextval, 'abc0005', 'a000005', '오명교', 'customer', 'M', 25, 'abc0005@naver.com', '010-4444-4444', '서울시 금천구 가산동 56-41');
+insert into account(id, user_id, pwd, name, acc, gender, age, email, phone, address) values(account_seq.nextval, 'abc0006', 'a000006', '정다운', 'customer', 'M', 20, 'abc0006@naver.com', '010-5555-5555', '서울시 금천구 가산동 3-16');
+insert into account(id, user_id, pwd, name, acc, gender, age, email, phone, address) values(account_seq.nextval, 'abc0007', 'a000007', '홍길동', 'customer', 'F', 26, 'abc0007@naver.com', '010-6666-6666', '서울시 금천구 가산동 4-19');
+insert into account(id, user_id, pwd, name, acc, gender, age, email, phone, address) values(account_seq.nextval, 'abc0008', 'a000008', '임꺽정', 'customer', 'F', 30, 'abc0008@naver.com', '010-7777-7777', '서울시 금천구 가산동 14-5');
+insert into account(id, user_id, pwd, name, acc, gender, age, email, phone, address) values(account_seq.nextval, 'abc0009', 'a000009', '이순신', 'customer', 'F', 21, 'abc0009@naver.com', '010-8888-8888', '서울시 금천구 가산동 386');
+insert into account(id, user_id, pwd, name, acc, gender, age, email, phone, address) values(account_seq.nextval, 'abc0010', 'a000010', '정말로', 'customer', 'F', 32, 'abc0010@naver.com', '010-9999-9999', '서울시 금천구 가산동 56');
+-- admin
+insert into account(id, user_id, pwd, name, acc, phone) values(0, 'admin100', 'admin100', '관리자', 'admin', '010-6789-9123');
+--===========================================================
+
+
+
+
+-- ==================== post ======================= 
+-- 가게 더미 최대 16개 크롤링해야함
+insert into post values( post_seq.nextval, 1,'김밥집은 성태김밥','수수 강남 상권에서 지속적으로 맛있는 집을 찾기란 고기집도 어려운 일인데 왜 명성이 자자한지 알만큼 맛있었다',5,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 2,'아주 맛있게 먹었씀닷','여기 진짜 맛있다... 라는 생각이 바로 드는 맛이다. 자극적이고 강렬하게 맛있는게 아니라 건강한 맛있음... 바브라 카다멈은 생강 느낌이 나는...',4,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 3,'굿굿 붸리굿','지금까지 먹어본 삼겹살중에 최고였다. 한입 베어물자마자 육즙이 입안에서 팡! 터진다. 목살- 소고기가 아닌가 착각될 정도로 엄청 부드럽고 고소하다.',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 4,'냠냠굿~~','정말 맛있었던 스시려 프리미엄. 오마카세 구성도 이소베마끼부터 솥밥 그리고 런치임에도 츠마미가 4-5가지나 나와서 감동받고 시작. 츠케모노 종류가 3가지나 되는 것도 정말 좋았다. 심지어 하나하나 다 맛도 있었다. 츠마미가 많아서인지 스시 종류는 상대적으로 좀 적었지만 네타, 샤리 다 마음에 들었고 접객도 좋았다. 이 리뷰를 쓰면서 느꼈다. 다음 달에 스려프 다시 예약해야겠다.',2,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 5,'연인과 가기 최고의 식당인듯',' 신논현에 위치한 인생소곱창집 약 삼년전에 알게된 곳인데 .. 그 이후로 다른 소곱창집은 성에 안 차요 .. 손욱정힘불끈은 손사장님의 자부심이 느껴지는 곳으로 나오는데 시간은 오래 걸리지만 맛이 끝내주기 때문에 기다림이 전혀 아깝지 않습니다!! 막걸리로 발효한 부추도 맛있어요 ~ 한번 먹으면 무조건 단골 된다는 그곳 ㅎㅎ 아무도 알려주지 않는 인생맛집인데 요즘 너무 핫해졌어요 ㅜ ㅜ 완전 강츄 !!!',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 6,'처음갔지만 마지막이 되었따.','....',1,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 7,'배고프게 가서 배부르게 귀가','켈리포니아컷은 다른 스테이크보다 훨씬 부드럽고,같이 나오는 소스와도 어울려요. 다른 스테이크집이라면 별도로 주문했어야하는 크림콘 스피니쉬 요크셔푸딩 매쉬포테이토도 나와서 너무 좋았고, 하나하나 맛있었지만 다 먹어갈때쯤 느끼한것을 보면 저는 뼈속까지 한국인인것 같습니다.ㅠ 종종 생각나서 또 갈 의향 있으며, 다음에는 런치 뷔페로 꼭 가보고싶어요',4,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 8,'그냥그래요','혼밥하기 딱좋은 곳이다 맛도 있고 분위기도 고급진곳 돈까스를 별로 선호하지 않는 사람을 데려가도 괜찮다 맛있다 라고 말이 나올정도의 퀄리티이며 돼지 비린내가 하나도 안난다',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 9,'생각보다 좀..','그냥 뭐 먹긴 먹었는데 다신 안 갈 것 가틱도 허ㅏ고 하하.',2,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 1,'존맛탱','진해장 진짜 맛있어요! 곱창이 질기지도 않고 국물은 얼큰하니 굿굿!!곱창만 계속 추가해서 먹어도 질리기가 않아요. 마무리로 볶음밥 필수 예요!! 또 가고 싶네요 ㅠㅠ',5,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 2,'먹고 나면 아주 배부름','막국수 먹으려고 왔다가 보쌈에 빠졌다. 어쩜 이렇게 보들보들 야들야들할 수가 있지.. 같이 나오는 보쌈김치나 무말랭이도 너무 맛있었다.',4,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 3,'더미데이터라니','정말 훌륭한 한우다이닝을 만남. 섬세한 세팅과 훌륭한 육질의 한우. 서관면옥의 냉면. 합리적인 가격까지 손님과 같이 즐거운 시간을 가지기에 부족한점이 거의 없음.',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 4,'하하하 다음엔 안갈래요','고오급진 분위기에 고오급진 맛. 드라이에이징 한 채끝살+등심 세트 먹었는데, 어휴 정말 살살 녹는다. 숙성한우 답게 치즈맛도 살짝씩 나는 편. 같이 구워주는 아스파라거스와 함께 겨자 살짝 얹어먹으면 세상 행복해지는 맛이다.',2,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 5,'뭐 그냥저냥..','기대 안하고 갔는데 정말 맛있게 배 두드리고 나왔네요. 추천 두개 드립니다. 사장님 내외분께서 친절하게 이것저것 알려주시는 것도 감사하고 무엇보다 맛도 있어서 다음에 또 가려고요.',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 6,'별로..','. 이베리코 스테이크는 제가 고기를 잘 안먹어서... ',1,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 7,'생각보다 괜찮네여','적당한 매콤함과 적당한 불맛. 근데 뭔지 모를 옛날맛!! 대학생 때 이런 거 먹어본 적 없는데 왜인지 먹어봤을 것 같은 그런 맛!! 말 그대로 호프집 같은 분위기 때문일까 오랫동안 이 자리에서 바비큐만 구워내셨기 때문일까 처음 왔는데도 많이 와본 것 같은 그런 느낌ㅋㅋ 키위 드레싱 뿌려진 샐러드도 엄청 듬뿍 주셨는데 먹다보니 중간에 감자튀김을 서비스로!! 감튀 왜케 바삭하고 맛있는데.. 이것도 다 먹음ㅋㅋㅋㅋ',4,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 8,'보통임다',' 강남쪽에서 한우먹으려면 큰거 몇장은 그냥 깨지는데 배터지게 먹고 생각보다 저렴해서 흐믓 +갈빗살만 파는곳은 처음봤는데 역시 고기는 진리... ',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 9,'음.. 그래요.. 그렇다..','. 이베리코 스테이크는 제가 고기를 잘 안먹어서... ',2,'2020-01-01','2021-06-01');
+
+insert into post values( post_seq.nextval, 1,'김밥집은 성태김밥','수수 강남 상권에서 지속적으로 맛있는 집을 찾기란 고기집도 어려운 일인데 왜 명성이 자자한지 알만큼 맛있었다',5,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 2,'아주 맛있게 먹었씀닷','여기 진짜 맛있다... 라는 생각이 바로 드는 맛이다. 자극적이고 강렬하게 맛있는게 아니라 건강한 맛있음... 바브라 카다멈은 생강 느낌이 나는...',4,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 3,'굿굿 붸리굿','지금까지 먹어본 삼겹살중에 최고였다. 한입 베어물자마자 육즙이 입안에서 팡! 터진다. 목살- 소고기가 아닌가 착각될 정도로 엄청 부드럽고 고소하다.',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 4,'냠냠굿~~','정말 맛있었던 스시려 프리미엄. 오마카세 구성도 이소베마끼부터 솥밥 그리고 런치임에도 츠마미가 4-5가지나 나와서 감동받고 시작. 츠케모노 종류가 3가지나 되는 것도 정말 좋았다. 심지어 하나하나 다 맛도 있었다. 츠마미가 많아서인지 스시 종류는 상대적으로 좀 적었지만 네타, 샤리 다 마음에 들었고 접객도 좋았다. 이 리뷰를 쓰면서 느꼈다. 다음 달에 스려프 다시 예약해야겠다.',2,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 5,'연인과 가기 최고의 식당인듯',' 신논현에 위치한 인생소곱창집 약 삼년전에 알게된 곳인데 .. 그 이후로 다른 소곱창집은 성에 안 차요 .. 손욱정힘불끈은 손사장님의 자부심이 느껴지는 곳으로 나오는데 시간은 오래 걸리지만 맛이 끝내주기 때문에 기다림이 전혀 아깝지 않습니다!! 막걸리로 발효한 부추도 맛있어요 ~ 한번 먹으면 무조건 단골 된다는 그곳 ㅎㅎ 아무도 알려주지 않는 인생맛집인데 요즘 너무 핫해졌어요 ㅜ ㅜ 완전 강츄 !!!',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 6,'처음갔지만 마지막이 되었따.','....',1,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 7,'배고프게 가서 배부르게 귀가','켈리포니아컷은 다른 스테이크보다 훨씬 부드럽고,같이 나오는 소스와도 어울려요. 다른 스테이크집이라면 별도로 주문했어야하는 크림콘 스피니쉬 요크셔푸딩 매쉬포테이토도 나와서 너무 좋았고, 하나하나 맛있었지만 다 먹어갈때쯤 느끼한것을 보면 저는 뼈속까지 한국인인것 같습니다.ㅠ 종종 생각나서 또 갈 의향 있으며, 다음에는 런치 뷔페로 꼭 가보고싶어요',4,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 8,'그냥그래요','혼밥하기 딱좋은 곳이다 맛도 있고 분위기도 고급진곳 돈까스를 별로 선호하지 않는 사람을 데려가도 괜찮다 맛있다 라고 말이 나올정도의 퀄리티이며 돼지 비린내가 하나도 안난다',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 9,'생각보다 좀..','그냥 뭐 먹긴 먹었는데 다신 안 갈 것 가틱도 허ㅏ고 하하.',2,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 1,'존맛탱','진해장 진짜 맛있어요! 곱창이 질기지도 않고 국물은 얼큰하니 굿굿!!곱창만 계속 추가해서 먹어도 질리기가 않아요. 마무리로 볶음밥 필수 예요!! 또 가고 싶네요 ㅠㅠ',5,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 2,'먹고 나면 아주 배부름','막국수 먹으려고 왔다가 보쌈에 빠졌다. 어쩜 이렇게 보들보들 야들야들할 수가 있지.. 같이 나오는 보쌈김치나 무말랭이도 너무 맛있었다.',4,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 3,'더미데이터라니','정말 훌륭한 한우다이닝을 만남. 섬세한 세팅과 훌륭한 육질의 한우. 서관면옥의 냉면. 합리적인 가격까지 손님과 같이 즐거운 시간을 가지기에 부족한점이 거의 없음.',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 4,'하하하 다음엔 안갈래요','고오급진 분위기에 고오급진 맛. 드라이에이징 한 채끝살+등심 세트 먹었는데, 어휴 정말 살살 녹는다. 숙성한우 답게 치즈맛도 살짝씩 나는 편. 같이 구워주는 아스파라거스와 함께 겨자 살짝 얹어먹으면 세상 행복해지는 맛이다.',2,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 5,'뭐 그냥저냥..','기대 안하고 갔는데 정말 맛있게 배 두드리고 나왔네요. 추천 두개 드립니다. 사장님 내외분께서 친절하게 이것저것 알려주시는 것도 감사하고 무엇보다 맛도 있어서 다음에 또 가려고요.',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 6,'별로..','. 이베리코 스테이크는 제가 고기를 잘 안먹어서... ',1,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 7,'생각보다 괜찮네여','적당한 매콤함과 적당한 불맛. 근데 뭔지 모를 옛날맛!! 대학생 때 이런 거 먹어본 적 없는데 왜인지 먹어봤을 것 같은 그런 맛!! 말 그대로 호프집 같은 분위기 때문일까 오랫동안 이 자리에서 바비큐만 구워내셨기 때문일까 처음 왔는데도 많이 와본 것 같은 그런 느낌ㅋㅋ 키위 드레싱 뿌려진 샐러드도 엄청 듬뿍 주셨는데 먹다보니 중간에 감자튀김을 서비스로!! 감튀 왜케 바삭하고 맛있는데.. 이것도 다 먹음ㅋㅋㅋㅋ',4,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 8,'보통임다',' 강남쪽에서 한우먹으려면 큰거 몇장은 그냥 깨지는데 배터지게 먹고 생각보다 저렴해서 흐믓 +갈빗살만 파는곳은 처음봤는데 역시 고기는 진리... ',3,'2020-01-01','2021-06-01');
+insert into post values( post_seq.nextval, 9,'음.. 그래요.. 그렇다..','. 이베리코 스테이크는 제가 고기를 잘 안먹어서... ',2,'2020-01-01','2021-06-01');
+--===========================================================
+
+
+-- ==================== post_file =======================
+-- 
+
+
+
+--  [ Final  추가 테이블 ] ==============================================================================================================================
+
+
+-- ==================== follow insert =======================
+-- id, target_name, target_id number, follower number
+
+-- 가게 데이터 최대 5개는 크롤링해야함.
+insert into follow values (follow_seq.nextVal, 2, 5);
+insert into follow values (follow_seq.nextVal, 3, 5);
+insert into follow values (follow_seq.nextVal, 4, 5);
+insert into follow values (follow_seq.nextVal, 5, 9);
+insert into follow values (follow_seq.nextVal, 5, 6);
+insert into follow values (follow_seq.nextVal, 5, 7);
+insert into follow values (follow_seq.nextVal, 5, 8);
+insert into follow values (follow_seq.nextVal, 1, 3);
+insert into follow values (follow_seq.nextVal, 2, 3);
+insert into follow values (follow_seq.nextVal, 3, 3);
+insert into follow values (follow_seq.nextVal, 2, 3);
+
+
+--=====================hash_tag insert======================
+-- 해시태그 입력은 보류
+-- menu 더미 삭제 (갱신시 자동등록)
+/*
+insert into hash_tag values(hash_tag_seq.nextVal, 'theme', '비오는날');
+insert into hash_tag values(hash_tag_seq.nextVal, 'rate', '만족');
+insert into hash_tag values(hash_tag_seq.nextVal, 'rate', '별로야');
+insert into hash_tag values(hash_tag_seq.nextVal, 'rate', '노맛');
+*/                                  
+--=====================hash_tag_rel insert====================
+-- 보류
+-- id, target_name, target_id, hash_tag_id            
+-- 가게용 더미 삭제 (갱신시 자동등록)
+/*
+insert into hash_tag_rel values(hash_tag_rel_seq.nextVal, 1, 1);
+insert into hash_tag_rel values(hash_tag_rel_seq.nextVal, 2, 2);
+insert into hash_tag_rel values(hash_tag_rel_seq.nextVal, 3, 3);
+insert into hash_tag_rel values(hash_tag_rel_seq.nextVal, 1, 4); 
+insert into hash_tag_rel values(hash_tag_rel_seq.nextVal, 1,7);
+insert into hash_tag_rel values(hash_tag_rel_seq.nextVal, 2,8);
+insert into hash_tag_rel values(hash_tag_rel_seq.nextVal, 3,9);
+*/
+
+-- ========================search_word =============================
+-- 아직 수정 안함 - 먼저 사용하는 팀에서 잘 수정해주세요... 하하!
+-- =================================================================
+-- search_word 더미를 넣으려면 account 더미도 함께 넣어주어야함 
+insert into search_word(id, word, accid, search_time) values(search_word_seq.nextval, '희주네 피자나라', 1, '2022-02-15');
+insert into search_word(id, word, accid, search_time) values(search_word_seq.nextval, '우빈닭발', 2, '2022-02-15');
+insert into search_word(id, word, accid, search_time) values(search_word_seq.nextval, '도가니탕', 3, '2022-02-15');
+insert into search_word(id, word, accid, search_time) values(search_word_seq.nextval, '오돌뼈', 4, '2022-02-15');
+insert into search_word(id, word, accid, search_time) values(search_word_seq.nextval, '다운초밥집', 5, '2022-02-15');
+insert into search_word(id, word, accid, search_time) values(search_word_seq.nextval, '피자', 6, '2022-02-15');
+insert into search_word(id, word, accid, search_time) values(search_word_seq.nextval, '숯불갈비', 7, '2022-02-15');
+insert into search_word(id, word, accid, search_time) values(search_word_seq.nextval, '영주곰탕', 8, '2022-02-15');
+insert into search_word(id, word, accid, search_time) values(search_word_seq.nextval, '김밥', 9, '2022-02-15');
+insert into search_word(id, word, accid, search_time) values(search_word_seq.nextval, '짜장면', 10, '2022-02-15');
+
+
+
+commit;

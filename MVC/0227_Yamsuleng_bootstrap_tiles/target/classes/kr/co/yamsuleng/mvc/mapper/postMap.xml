@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="post">
+	
+	
+<!-- 
+List<Map<String, Object>> getPostList();
+	<select id="getPostList" resultType="map">
+		select user_id, title, content, register_date, SUBSTR('⭐⭐⭐⭐⭐', 0, p.star_rate) star_rate, p.id postID
+		from account a, post p
+		where a.id = p.accid_fk
+	</select> 
+-->	
+
+	
+	<!-- (홈화면) 최근게시글 5개 -->
+	<select id="getLatestPost" resultType="map">
+		select ROWNUM, user_id, title, content, register_date, SUBSTR('⭐⭐⭐⭐⭐', 0, p.star_rate) star_rate, p.id postID
+		from account a, post p
+		where a.id = p.accid_fk
+		<![CDATA[ 
+		and ROWNUM >=1 and ROWNUM<=5
+		]]> 
+	</select> 
+	
+	
+	<!-- (list page) 페이징 & 검색처리 후 게시글 -->
+	<!-- List<Map<String, Object>> getPagingPost(Criteria cri);  -->
+	<select id="getPagingPost" parameterType="cri" resultType="map">
+		SELECT *
+		FROM  (SELECT ROWNUM rm, TEMP.*   
+		           FROM (select user_id, title, content, register_date, SUBSTR('⭐⭐⭐⭐⭐', 0, p.star_rate) star_rate, p.id postID
+		                   from account a, post p
+		                   where a.id = p.accid_fk
+		                   and (content like '%' || #{searchKeyWord} || '%'
+		                   or title like '%' || #{searchKeyWord} || '%') 
+		                   order by postID desc
+		                ) TEMP
+		        )LAST 
+		<![CDATA[ 
+		Where rm >= (1 + #{amount}*(#{pageNo}-1))  and rm <= #{pageNo} * #{amount}
+		]]> 
+	</select>	
+	
+	
+	<!-- int getPostCnt(Criteria cri); -->
+    <select id="getPostCnt" resultType="int" parameterType="cri">
+		select count(id) 
+		from post 
+		where content like '%' || #{searchKeyWord} || '%'
+		or title like '%' || #{searchKeyWord} || '%' 
+	</select>
+	
+	
+	<!-- PostVO findPostById(int id); -->
+    <select id="findPostById" resultType="pvo">
+		select *
+		  from post
+		 where id = #{id}
+	</select>
+	
+	
+	<!-- int insertPost(PostVO postVO); -->
+	<insert id="insertPost" parameterType="pvo"> 
+	 	 insert into post values
+	 	 (post_seq.nextVal, #{title},#{content})
+	</insert>
+	
+	
+	<!-- int updatePost(PostVO postVO); -->
+	<update id="updatePost" parameterType="pvo">
+		update post set
+		title = #{title},
+		content = #{content},
+		star_rate = #{star_rate},
+		where id = #{id}
+	</update>
+	
+	
+	<!-- int deletePost(int id); -->
+	<delete id="deletePost" parameterType="pvo">
+		delete post where id = #{id}
+	</delete>
+	
+	
+</mapper>  
