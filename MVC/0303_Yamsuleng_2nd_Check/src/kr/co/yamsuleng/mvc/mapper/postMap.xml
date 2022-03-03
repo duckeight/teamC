@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="post">
+	
+	<!-- (홈화면) 최근게시글 5개 -->
+	<!-- List<Map<String, Object>> getLatestPost(); -->
+	<select id="getLatestPost" resultType="map">
+		select ROWNUM, user_id, title, content, register_date, 
+				SUBSTR('⭐⭐⭐⭐⭐', 0, p.star_rate) star_rate, p.id postID, a.id accID
+		from account a, post p
+		where a.id = p.accid_fk
+		<![CDATA[ 
+		and ROWNUM >=1 and ROWNUM<=5
+		]]> 
+	</select> 
+	
+	
+	<!-- (list page) 페이징 & 검색처리 후 게시글 -->
+	<!-- List<Map<String, Object>> getPagingPost(Criteria cri);  -->
+	<select id="getPagingPost" parameterType="cri" resultType="map">
+		SELECT *
+		FROM  (SELECT ROWNUM rm, TEMP.*   
+		           FROM (select user_id, title, content, register_date, 
+		           				SUBSTR('⭐⭐⭐⭐⭐', 0, p.star_rate) star_rate, p.id postID, a.id accID
+		                   from account a, post p
+		                   where a.id = p.accid_fk
+		                   and (content like '%' || #{searchKeyWord} || '%'
+		                   or title like '%' || #{searchKeyWord} || '%') 
+		                   order by postID desc
+		                ) TEMP
+		        )LAST 
+		<![CDATA[ 
+		Where rm >= (1 + #{amount}*(#{pageNo}-1))  and rm <= #{pageNo} * #{amount}
+		]]> 
+	</select>	
+	
+	
+	<!-- int getPostCnt(Criteria cri); -->
+    <select id="getPostCnt" resultType="int" parameterType="cri">
+		select count(id) 
+		from post 
+		where content like '%' || #{searchKeyWord} || '%'
+		or title like '%' || #{searchKeyWord} || '%' 
+	</select>
+	
+
+	<!-- Map<String, Object> getPostById(int id); -->
+	<select id="getPostById" resultType="map">
+		select user_id, title, content, register_date, SUBSTR('⭐⭐⭐⭐⭐', 0, p.star_rate) star_rate, p.id postID, a.id accID
+		from account a, post p
+		where a.id = p.accid_fk
+		and p.id=#{id}
+	</select> 
+	
+	
+	<!-- Tab별 게시글  1.내게시글  2.피드글 -->
+	<!-- List<Map<String, Object>> findPostByTabId(Map<String,Object> bindingValue); -->
+    <select id="findPostByTabId" resultType="map" parameterType="map">        
+		select user_id, title, content, register_date, 
+				SUBSTR('⭐⭐⭐⭐⭐', 0, p.star_rate) star_rate, p.id postID, a.id accID
+		from account a, post p
+		where a.id = p.accid_fk  
+		<choose>
+	    <when test="activeTab == 'myPost'">
+   			and p.accid_fk = #{pageOwnerId}
+    	</when>
+	    <when test="activeTab == 'myFeed'">
+	   		and p.accid_fk in (select distinct target_id
+			                    from follow
+			                    where follower = #{pageOwnerId})
+    	</when> 
+    	</choose>
+		order by p.register_date desc  
+	</select>
+	
+	
+	<!-- int insertPost(PostVO postVO);  -->
+	<insert id="insertPost" parameterType="pvo">
+		insert into post values (post_seq.nextval, #{accId_fk}, #{title}, #{content}, #{star_rate}, sysdate, sysdate)
+	</insert> 
+	
+	<!-- int updatePost(PostVO postVO); -->
+	<update id="updatePost" parameterType="pvo">
+		update post set
+			   title = #{title},
+			   content = #{content},
+			   star_rate = #{star_rate}
+		where id = #{id}
+	</update> 
+	
+	<!-- int deletePost(int id); -->
+	<delete id="deletePost" parameterType="int">
+		delete post where id = #{id}
+	</delete>
+	
+	
+</mapper>  

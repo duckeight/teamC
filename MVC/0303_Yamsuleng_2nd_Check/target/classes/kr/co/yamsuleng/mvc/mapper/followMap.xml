@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="follow">
+
+	<!-- 팔로잉 -->
+	<insert id="following" parameterType="map">
+		insert into follow values (follow_seq.nextval, #{pageOwnerId}, #{loginId} )
+	</insert>
+	
+	<!-- 언팔 -->
+	<delete id="unfollowing" parameterType="map">
+		delete follow 
+		where target_id = #{pageOwnerId}
+		and follower = #{loginId}
+	</delete>
+
+	<!-- 내가 이사람을 팔로우했는지 플래그를 전달해주세요 ..? -->
+	<!-- public int isFollow(Map<String,Object> bindingValue); -->
+	<select id="isFollow" parameterType="map" resultType="int">
+		select count(*)
+		from follow
+		where target_id = #{pageOwnerId}  
+		and follower = #{loginId}
+	</select>
+	
+	<!-- 내가 팔로우한 사람 목록 -->
+	<!-- public List<Map<String, Object>> getFollowList(Map<String,Object> bindingValue); -->
+	<!-- TARGET_ID, USER_ID, FILE_NAME, UPLOAD_PATH -->
+    <select id="getFollowList" resultType="map">
+		select f.target_id, f.follower,  a.user_id, pf.file_name, pf.upload_path
+		from follow f, account a, post_file pf
+        where pf.target_name = 'c'
+        and a.id = pf.target_id
+		<choose>
+		    <when test="activeTab == 'following'">
+				and f.target_id = a.id 
+		        and f.follower= #{pageOwnerId}  
+	    	</when>
+		    <when test="activeTab == 'follower'">
+		    	and f.follower = a.id 
+		        and f.target_id= #{pageOwnerId}  
+	    	</when> 
+    	</choose>
+	</select>
+
+	<!-- 나를 팔로잉 하는 사람 목록 -->
+	<!-- 
+    <select id="getFollower" resultType="map">
+   		select f.target_id,  a.user_id, pf.file_name, pf.upload_path
+		from follow f, account a, post_file pf 
+		where f.target_id = a.id
+		and a.id = pf.target_id
+		and f.target_id=#{pageOwnerId} 
+	</select>
+ -->
+
+
+	<!-- 팔로우 취소 -->
+	<!-- public int deleteFollow(Map<String,Object> bindingValue); -->
+	<delete id="deleteFollow" parameterType="map">
+		delete follow 
+		<choose>
+		    <when test="activeTab == 'following'">
+				where target_id = #{delTargetId}
+				and follower = #{pageOwnerId}	    	
+			</when>
+		    <when test="activeTab == 'follower'">
+				where target_id = #{pageOwnerId}
+				and follower = #{delTargetId}	    	
+			</when> 
+    	</choose>
+	</delete>
+	
+	<!-- 팔로워 차단 --><!-- 
+	<delete id="deleteFollower" parameterType="int">
+		delete follow 
+		where target_id = #{pageOwnerId}
+		and follower = #{delTargetId}
+	</delete>  -->
+	
+</mapper>  

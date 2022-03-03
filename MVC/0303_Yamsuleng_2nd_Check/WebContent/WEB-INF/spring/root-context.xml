@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd">
+<context:annotation-config/>
+<aop:aspectj-autoproxy/>
+
+
+<!-- 
+웹 어플리케이션을 운영할 경우 JDBC 설정을 WAS에서 하게 된다.
+
+이유 1) 실제로 운영을 할 경우 개발자는 웹 어플리케이션을 만들지만, WAS를 관리하는 서버관리자는 따로 있다.
+
+이유 2) 하나의 WAS에 하나의 웹 어플리케이션을 올리기도 하지만 대부분은 그렇지 않다.
+즉, WAS : 웹어플리케이션의 관계가 1:n 관계가 많다. 
+만약 n개의 어플리케이션들이 동일 db를 본다면, DB pool도 n개가 나오게 된다. 그럼 관리도 어렵고 자원이 낭비된다.
+
+이유 3) DB 1 에 장애가 생기면 백업 DB 2로 로드밸런싱을 해야 하는데, 소스단에 DB설정이 있으면 운영상에 어려움을 겪게 된다
+ -->
+ 
+ 
+ 
+ <!-- java:comp/env 얘가 앞에 무조건 붙어있어야 jndi식 이름으로 찾는게 가능하다 -->
+ <!-- 여기선 myora가 dataSource name -->
+<bean id="dataSource" 
+    class="org.springframework.jndi.JndiObjectFactoryBean">
+    <!-- JNDI(Java Naming and Directory Interface)는 디렉터리 서비스에서 제공하는
+		데이터 및 객체를 발견(discover)하고 참고(lookup) 하기 위한 자바 API다.  -->
+	<property name="jndiName" value="java:comp/env/jdbc/myora"/>
+</bean>
+
+<!-- MyBatis -->
+<!-- root-context를 설정하면서 sessionfactory 빈 객체를 생성할 때 프로퍼티 값으로 config.xml 파일을 읽어 alias로 저장할 VO클래스를 설정 -->
+<bean id="factoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<property name="dataSource" ref="dataSource"/><!-- dataSource들의 위의...jndiName에서 쓰임-->
+	<property name="configLocation" 
+				value="classpath:/kr/co/yamsuleng/mvc/config/config.xml"/> <!-- allias 설정한 곳 -->
+	<property name="mapperLocations" 
+				value="classpath*:/kr/co/yamsuleng/mvc/mapper/*.xml"/> <!-- allias 들이 쓰일 곳 -->
+</bean>
+
+<!-- SqlSessionTemplate는 단순한 SqlSession의 구현체 -->
+<bean id="ss" class="org.mybatis.spring.SqlSessionTemplate"><!--DAO에서 쓰인다 -->
+	<constructor-arg ref="factoryBean"/>
+</bean>
+
+<!-- Fileupload -->
+<bean id="multipartResolver" 
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+</beans>
+
+
+

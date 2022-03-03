@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="store">
+
+
+	<select id="getStore" resultType="map">
+		select id, token, name, address, menu_cat, SUBSTR('⭐⭐⭐⭐⭐', 0, total_rate) total_rate, facility, img_src
+		from store 
+		where id = ${id}
+	</select> 
+
+	<!-- (홈화면) 최근가게 ...4개?  후에 추천맛집으로 변경할것 -->
+	<select id="getLatestStore" resultType="map">
+		select ROWNUM, id, token, name, address,menu_cat, SUBSTR('⭐⭐⭐⭐⭐', 0, total_rate) total_rate, facility, img_src
+		from store 
+		<![CDATA[ 
+		where ROWNUM >=1 and ROWNUM<=2
+		]]> 
+	</select> 
+	
+	<!-- List<ReplyVO> getAllStoreWithPaging(); -->
+	<select id="getAllStoreWithPaging" parameterType="cri" resultType="map"> 
+		SELECT *
+		FROM  (SELECT ROWNUM rm, TEMP.*  
+			from (
+					select id, token, name, address,menu_cat, SUBSTR('⭐⭐⭐⭐⭐', 0, total_rate) total_rate, facility, img_src
+					from store
+					where name like '%'||#{searchKeyWord}||'%'
+					or address like '%'||#{searchKeyWord}||'%'
+					or menu_cat like '%'||#{searchKeyWord}||'%' 
+					order by id desc
+				)TEMP
+			)LAST 
+		<![CDATA[ 
+		Where rm >= (1 + #{amount}*(#{pageNo}-1))  and rm <= #{pageNo} * #{amount}
+		]]>  
+	</select>
+	
+	
+	<!-- public int getTotalCount(Criteria cri); -->
+	<select id="getTotalCount" resultType="_int">
+		select count(*)
+		  from store
+		where id > 0	
+	</select>
+		
+	
+</mapper>  

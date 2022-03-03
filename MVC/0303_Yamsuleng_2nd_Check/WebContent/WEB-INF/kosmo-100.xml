@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+		
+<!-- kr.co.kosmo.mvc 이하 패키지 몽땅 scan 설정 -->
+<!--  survlet-context에서 root-context는 참조 가능하지만 반대는 불가능하므로
+	여기서 total scan을 잡아주면 수동 controller 스캐닝과 같다? -->
+<context:component-scan base-package="kr.co.yamsuleng.mvc"/>
+
+<!-- mvc:annotation-driven  
+Spring MVC 컴포넌트들을 디폴트 설정을 통해 활성화한다. 
+HandlerMapping과 HandlerAdapter를 Bean으로 등록한다.
+Bean을 생성하기 위해 xml 파일에 context:component-scan을 명시하면 이 태그를 포함하지 않아도 MVC 어플리케이션을 작동한다.
+-->
+<mvc:annotation-driven/>
+
+
+<!-- 정적 자원 위치 설정하기
+ CSS, JS, 이미지 등의 자원은 거의 변하지 않기 때문에, 웹 브라우저에 캐시를 하면 네트워크 사용량, 서버 사용량, 웹 브라우저의 반응 속도 등을 개선할 수 있다 -->
+<!-- <mvc:resources location="/resources/" mapping="/resources/**"/> -->
+<mvc:resources location="/resources/" mapping="/**"/>
+
+<!-- Tiles Config -->
+<bean id="tilesViewResolver" 
+class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+<property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+<property name="order" value="0"/>
+</bean>
+
+<bean id="tilesConfigurer" 
+class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+<property name="definitions">
+<list>
+<value>/WEB-INF/tiles/tiles-config.xml</value>
+</list>
+</property>
+</bean> 
+
+<!-- InternalResourceViewResolver 디폴트 리졸버로써  뷰 이름으로 부터 jsp 나 tiles 연동을 위한
+AbstractUrlBasedView 타입의 뷰 객체를 리턴.
+항상 최하위 우선순위를 줘야한다. 항상 뷰 이름에 매핑되는 뷰 객체를 리턴하므로 Null 리턴이 없다.
+다른 ViewResolver보다 상위에 있으면 다른 ViewResolver를 사용할 수가 없게 된다.
+이 밖에도 BeanNameViewResolver, XmlViewResolver 가 있다.
+ -->
+<bean id="viewResolver" 
+class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<property name="prefix" value="/WEB-INF/views/"/>
+<property name="suffix" value=".jsp"/>
+<property name="order" value="1"/>
+</bean>
+</beans>
